@@ -1,0 +1,18 @@
+[Unit]
+Description=Solar Monitoring Uploader
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=raspberrypi
+WorkingDirectory=/home/raspberrypi/Desktop/work
+ExecStart=/home/raspberrypi/Desktop/work/venv/bin/python -u /home/raspberrypi/Desktop/work/allcode.py --target-ip 192.168.1.41
+Restart=always
+RestartSec=5
+StandardOutput=append:/home/raspberrypi/Desktop/work/solar_runtime.log
+StandardError=append:/home/raspberrypi/Desktop/work/solar_runtime.log
+
+[Install]
+WantedBy=multi-user.target
